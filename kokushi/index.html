@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ドク・ボルトの国試勉強ラボ">
+<meta property="og:description" content="PT・OT国試の勉強法を、研究で確かめた方法だけでドク・ボルトが解説。クイズや実験で体験できます。">
+<meta property="og:url" content="https://hijiriinu.github.io/doc-bolt-ig-stage/kokushi/">
+<meta property="og:image" content="https://hijiriinu.github.io/doc-bolt-ig-stage/kokushi/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M14 1 3 18h7l-3 13 12-18h-7z' fill='%23f2b705' stroke='%23272b33' stroke-width='2'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ドク・ボルトの国試勉強ラボ</title>
+<meta name="description" content="PT・OT国家試験の勉強法を、研究で確かめた方法だけでドク・ボルトが解説します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one 680px reading column, red top rule like the IG carousel, chat bubbles between doc and student, interactive "lab" panels per chapter */
+:root{
+  --paper:#f8f5f1; --card:#ffffff; --ink:#272b33; --ink-soft:#5d6470; --line:#e6ded5;
+  --bolt:#c4392d; --bolt-soft:#f6e1dd; --volt:#f2b705; --good:#2e8b57; --good-soft:#e2f2e8;
+  --display:"Dela Gothic One","Hiragino Kaku Gothic StdN","Yu Gothic",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1b1d22; --card:#24272e; --ink:#eceae6; --ink-soft:#a9aeb8; --line:#363a43;
+  --bolt:#ff6b5c; --bolt-soft:#3b2523; --volt:#ffc933; --good:#5fd08e; --good-soft:#1f3329; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1b1d22; --card:#24272e; --ink:#eceae6; --ink-soft:#a9aeb8; --line:#363a43;
+  --bolt:#ff6b5c; --bolt-soft:#3b2523; --volt:#ffc933; --good:#5fd08e; --good-soft:#1f3329; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bolt)}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--bolt)}
+:focus-visible{outline:3px solid var(--volt);outline-offset:2px;border-radius:6px}
+
+/* reading progress */
+.progress{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;height:6px;background:var(--line)}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bolt),var(--volt));transition:width .1s linear}
+
+/* hero */
+.hero{padding-block:40px 24px;display:grid;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--bolt);font-weight:700}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,9vw,58px);line-height:1.2;letter-spacing:.01em}
+.hero h1 em{font-style:normal;color:var(--bolt);position:relative;white-space:nowrap}
+.hero .lead{color:var(--ink-soft);font-size:15px}
+.stage{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;min-height:180px;position:relative}
+.stage img{height:170px;width:auto}
+.stage .doc{animation:bob 3.2s ease-in-out infinite}
+.stage .kid{animation:bob 3.2s ease-in-out infinite .6s}
+.countdown{flex:1;align-self:center;text-align:center;background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:12px 8px;min-width:0}
+.countdown .n{font-family:var(--display);font-size:clamp(40px,12vw,64px);line-height:1;color:var(--bolt);font-variant-numeric:tabular-nums}
+.countdown small{display:block;font-size:12px;color:var(--ink-soft);line-height:1.5}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{font-size:13px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.toc a:hover{border-color:var(--bolt);color:var(--bolt)}
+
+/* chapters */
+section.ch{padding-block:40px 8px;display:grid;gap:20px;border-top:1px dashed var(--line)}
+.ch-head{display:grid;gap:6px}
+.ch-no{font-family:var(--mono);font-size:12px;color:var(--bolt);letter-spacing:.1em;font-weight:700}
+.ch h2{font-family:var(--display);font-weight:400;font-size:clamp(24px,6.4vw,34px);line-height:1.35}
+.ch p.body{max-width:38em}
+
+/* chat */
+.chat{display:grid;gap:14px}
+.msg{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:end}
+.msg.kid{grid-template-columns:1fr 56px}
+.msg.kid .ava{order:2}
+.ava{width:56px;height:56px;border-radius:50%;background:var(--card);border:2px solid var(--ink);overflow:hidden;display:grid;place-items:start center}
+.ava img{width:62px;max-width:none;margin-top:-2px}
+.bubble{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:10px 14px;position:relative;min-width:0;font-weight:500}
+.msg.doc .bubble{border-bottom-left-radius:4px}
+.msg.kid .bubble{border-bottom-right-radius:4px;background:var(--bolt-soft)}
+.bubble b{color:var(--bolt)}
+.msg.pop .bubble{animation:pop .45s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes pop{0%{transform:scale(.92) translateY(6px)}100%{transform:none}}
+.shock .bubble{border-color:var(--bolt)}
+.shock.pop .ava{animation:shake .5s ease both}
+@keyframes shake{0%,100%{transform:none}20%{transform:rotate(-12deg)}40%{transform:rotate(10deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(4deg)}}
+
+/* evidence chip + source */
+.src{font-size:12.5px;color:var(--ink-soft);line-height:1.6;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{font-size:11px;font-weight:700;letter-spacing:.06em;border-radius:6px;padding:1px 8px;border:1.5px solid currentColor}
+.chip.est{color:var(--good)}
+.chip.lik{color:var(--volt)}
+.chip.gue{color:var(--ink-soft)}
+
+/* lab panel */
+.lab{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:18px;display:grid;gap:14px;box-shadow:5px 5px 0 var(--ink)}
+.lab-title{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--bolt);display:flex;align-items:center;gap:6px}
+.lab h3{font-size:18px;font-weight:900;line-height:1.5}
+.btn{appearance:none;font:inherit;font-weight:700;font-size:15px;border:2px solid var(--ink);background:var(--volt);color:#272b33;border-radius:12px;padding:10px 18px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn.ghost{background:var(--card);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* quiz */
+.q{display:grid;gap:10px;padding:12px;border-radius:14px;background:var(--paper)}
+.q p{font-weight:700}
+.q .opts{display:flex;gap:10px}
+.q .opts button{flex:1;font-family:var(--display);font-size:26px;line-height:1;padding:10px 0;border-radius:12px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.q .opts button[disabled]{cursor:default;opacity:.5}
+.q .opts button.right{background:var(--good-soft);border-color:var(--good);opacity:1;color:var(--good)}
+.q .opts button.wrong{background:var(--bolt-soft);border-color:var(--bolt);opacity:1;color:var(--bolt)}
+.q .why{font-size:14px;color:var(--ink-soft)}
+.score{font-weight:900;font-size:18px}
+.score .big{font-family:var(--display);font-size:32px;color:var(--bolt);font-weight:400}
+
+/* exam table */
+.et{display:grid;gap:2px;font-variant-numeric:tabular-nums}
+.et-row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;padding:8px 4px;border-bottom:1px solid var(--line);font-size:15px}
+.et-row:last-child{border-bottom:0}
+.et-row b{font-family:var(--display);font-weight:400;font-size:20px;color:var(--bolt)}
+.et-h{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.1em}
+
+/* type result + share */
+.type{display:grid;gap:8px;padding:16px;border-radius:16px;border:2px dashed var(--bolt);background:var(--bolt-soft)}
+.type .tname{font-family:var(--display);font-size:22px;line-height:1.3}
+.share-msg{font-size:13px;color:var(--good);font-weight:700;min-height:1.4em}
+
+/* save card */
+.savecard{background:var(--ink);color:var(--paper);border-radius:22px;padding:22px 20px;display:grid;gap:12px;position:relative;overflow:hidden}
+.savecard::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--bolt);opacity:.9}
+.savecard h3{font-family:var(--display);font-weight:400;font-size:22px;position:relative;z-index:1}
+.savecard ol{margin:0;padding-left:1.4em;display:grid;gap:8px;font-weight:700;position:relative;z-index:1}
+.savecard ol li::marker{color:var(--volt);font-family:var(--mono)}
+.savecard small{opacity:.75;font-size:12px;position:relative;z-index:1}
+
+/* chart */
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:7.5em 1fr 3.2em;gap:10px;align-items:center;font-size:14px;font-weight:700}
+.track{height:28px;background:var(--paper);border-radius:8px;overflow:hidden;border:1.5px solid var(--line)}
+.fill{height:100%;width:0;border-radius:6px;transition:width .9s cubic-bezier(.2,.9,.2,1)}
+.fill.read{background:var(--ink-soft)}
+.fill.test{background:var(--bolt)}
+.val{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.timebtns{display:inline-flex;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.timebtns button{font:inherit;font-weight:700;font-size:14px;padding:8px 14px;border:0;background:var(--card);color:var(--ink);cursor:pointer}
+.timebtns button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.verdict{font-weight:700;min-height:1.8em}
+
+.flash{position:fixed;inset:0;background:var(--volt);opacity:0;pointer-events:none;z-index:50}
+.flash.on{animation:flash .45s ease-out}
+@keyframes flash{0%{opacity:.55}100%{opacity:0}}
+
+/* timeline */
+.tl{position:relative;height:74px;margin:6px 4px 0}
+.tl .axis{position:absolute;left:0;right:0;top:30px;height:4px;background:var(--line);border-radius:2px}
+.tl .dot{position:absolute;top:22px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--bolt);border:3px solid var(--card);box-shadow:0 0 0 2px var(--bolt);transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.tl .dot.on{transform:scale(1)}
+.tl .dot.start{background:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+.tl .dot.end{background:var(--volt);box-shadow:0 0 0 2px var(--ink)}
+.tl .lbl{position:absolute;top:50px;font-size:11px;color:var(--ink-soft);transform:translateX(-50%);white-space:nowrap;font-family:var(--mono)}
+.tl-list{display:flex;flex-wrap:wrap;gap:6px;font-size:13px}
+.tl-list span{background:var(--paper);border-radius:8px;padding:2px 8px;font-family:var(--mono)}
+
+/* shuffle */
+.decks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.deck{display:grid;gap:6px;min-width:0}
+.deck h4{margin:0;font-size:13px;color:var(--ink-soft)}
+.cards{display:flex;flex-wrap:wrap;gap:5px}
+.card{width:44px;height:30px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:900;color:#fff;transition:transform .4s}
+.card.a{background:#3a6ea5}.card.b{background:#2e8b57}.card.c{background:#c4392d}
+.card.spin{animation:flip .5s ease}
+@keyframes flip{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+
+/* sleep meter */
+.meter{display:grid;gap:8px}
+.meter input{width:100%;accent-color:var(--bolt)}
+.meter .out{font-weight:900}
+
+/* plan */
+.month{display:grid;gap:8px}
+.month h4{margin:0;font-family:var(--display);font-weight:400;font-size:17px;display:flex;gap:8px;align-items:baseline}
+.month h4 span{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+.check{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;padding:8px 10px;border-radius:12px;background:var(--paper);cursor:pointer}
+.check input{width:22px;height:22px;margin:3px 0 0;accent-color:var(--good)}
+.check.done span{text-decoration:line-through;color:var(--ink-soft)}
+.pbar{height:14px;background:var(--paper);border-radius:999px;overflow:hidden;border:1.5px solid var(--line)}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--good),var(--volt));transition:width .4s}
+
+/* follow */
+.follow{margin-top:40px;border:2px solid var(--ink);border-radius:24px;padding:24px 18px;background:var(--bolt);color:#fff;display:grid;gap:14px;text-align:center;justify-items:center;box-shadow:6px 6px 0 var(--ink)}
+.follow h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,6vw,30px);line-height:1.4}
+.follow img{height:120px;width:auto;animation:bob 2.6s ease-in-out infinite}
+.follow a.cta{display:inline-block;background:#fff;color:#c4392d;font-weight:900;text-decoration:none;font-size:17px;border:2px solid var(--ink);border-radius:999px;padding:12px 26px;box-shadow:3px 3px 0 var(--ink)}
+.follow .handle{font-family:var(--mono);font-size:14px;opacity:.9}
+
+.refs{margin-top:36px;font-size:12.5px;color:var(--ink-soft);display:grid;gap:6px}
+.refs h3{font-size:14px;color:var(--ink)}
+.refs ol{margin:0;padding-left:1.4em;display:grid;gap:4px}
+footer{margin-top:28px;font-size:12px;color:var(--ink-soft);text-align:center}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
+
+/* intro loader: everyone dashing across the screen */
+.intro{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;place-items:center;overflow:hidden;cursor:pointer;transition:opacity .5s ease,visibility .5s}
+.intro.out{opacity:0;visibility:hidden}
+.intro::before{content:"";position:absolute;inset:0 0 auto;height:8px;background:var(--bolt)}
+.track-run{position:relative;width:min(560px,100%);height:200px}
+.ground{position:absolute;left:0;right:0;bottom:22px;height:3px;background:repeating-linear-gradient(90deg,var(--ink) 0 18px,transparent 18px 32px);animation:roll .5s linear infinite}
+@keyframes roll{to{background-position:-32px 0}}
+.runner{position:absolute;bottom:24px;left:0;animation:dash 2.4s linear infinite}
+.runner .body{display:block;transform-origin:50% 100%;animation:hop .32s ease-in-out infinite alternate}
+.runner img{display:block;height:120px;width:auto}
+.runner.kid{animation-delay:0s}
+.runner.doc{animation-delay:-.55s}
+.runner.doc .body{animation-duration:.28s}
+.runner.kid img{height:112px}
+@keyframes dash{0%{transform:translateX(-140px)}100%{transform:translateX(calc(min(560px,100vw) + 20px))}}
+@keyframes hop{0%{transform:translateY(0) rotate(-6deg)}100%{transform:translateY(-14px) rotate(6deg)}}
+.puff{position:absolute;bottom:-2px;left:-10px;width:14px;height:14px;border-radius:50%;background:var(--line);animation:puff .32s ease-out infinite}
+.puff.b{left:-26px;width:10px;height:10px;animation-delay:.16s}
+@keyframes puff{0%{transform:scale(.4);opacity:.9}100%{transform:translateX(-18px) scale(1.4);opacity:0}}
+.zap{position:absolute;top:8px;left:50%;width:34px;animation:zap 1.2s ease-in-out infinite}
+.zap path{fill:var(--volt);stroke:var(--ink);stroke-width:2}
+@keyframes zap{0%,100%{transform:translateX(-50%) rotate(-10deg) scale(1)}50%{transform:translateX(-50%) rotate(10deg) scale(1.2)}}
+.intro-txt{position:absolute;left:0;right:0;bottom:calc(50% - 170px);text-align:center;display:grid;gap:10px;justify-items:center;padding-inline:16px}
+.intro-txt b{font-family:var(--display);font-weight:400;font-size:clamp(18px,5vw,24px)}
+.intro-bar{width:min(240px,70vw);height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--card)}
+.intro-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bolt),var(--volt));animation:load 2.3s ease-out forwards}
+@keyframes load{to{width:100%}}
+.intro-txt small{font-size:12px;color:var(--ink-soft)}
+
+@media (max-width:420px){
+  .stage img{height:130px}
+  .decks{grid-template-columns:1fr}
+  .bar{grid-template-columns:6.2em 1fr 3em;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<div class="progress" aria-hidden="true"><span id="prog"></span></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+<div class="intro" id="intro" hidden aria-hidden="true">
+  <div class="track-run">
+    <svg class="zap" viewBox="0 0 24 32"><path d="M14 1 3 18h7l-3 13 12-18h-7z"/></svg>
+    <div class="runner doc"><span class="body"><img src="doc.png" alt=""></span><i class="puff"></i><i class="puff b"></i></div>
+    <div class="runner kid"><span class="body"><img src="marty.png" alt=""></span><i class="puff"></i><i class="puff b"></i></div>
+    <div class="ground"></div>
+  </div>
+  <div class="intro-txt"><b>国試まで全力ダッシュ中デス！</b><div class="intro-bar"><i></i></div><small>タップでスキップ</small></div>
+</div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">PT・OT 国家試験 ／ @doc_bolt_pt</div>
+  <h1>その勉強法、<br><em>根拠ある？</em></h1>
+  <p class="lead">PubMedなどで原著を確認した研究だけを使って、国試の勉強法をドク・ボルトが解説します。PTもOTも、効く勉強の仕方は同じです。読み終わるころには、明日からの1日の過ごし方が決まります。</p>
+  <div class="stage">
+    <img class="doc" src="doc.png" alt="ドク・ボルト" id="docHero">
+    <div class="countdown" aria-live="polite">
+      <small>例年の試験日（2月下旬）まで</small>
+      <div class="n" id="days">--</div>
+      <small>日くらい<br>※第62回の日程は厚労省の発表で確認</small>
+    </div>
+    <img class="kid" src="marty.png" alt="国試を控えた学生">
+  </div>
+  <nav class="toc" aria-label="目次">
+    <a href="#quiz">0. 常識チェック</a><a href="#exam">1. 国試を知る</a><a href="#reread">2. 読み返し</a><a href="#retrieval">3. 解いて思い出す</a><a href="#spacing">4. 間隔をあける</a><a href="#mix">5. 科目を混ぜる</a><a href="#sleep">6. 睡眠</a><a href="#plan">7. 4か月プラン</a>
+  </nav>
+</header>
+
+<!-- 0 -->
+<section class="ch" id="quiz">
+  <div class="ch-head"><div class="ch-no">CHAPTER 0</div><h2>まずは勉強法の常識チェック</h2></div>
+  <div class="chat">
+    <div class="msg kid"><div class="ava"><img src="marty.png" alt=""></div><div class="bubble">過去問は5周読めば受かるって、先輩が言ってました！</div></div>
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">それ、研究で確かめたデス？　まずは5問。<b>直感で</b>○か×を押すデス！</div></div>
+  </div>
+  <div class="lab" id="quiz1">
+    <div class="lab-title">LAB 0 ／ ○×クイズ</div>
+  </div>
+  <div class="type" id="typeBox" hidden>
+    <div class="lab-title">あなたの勉強法タイプ</div>
+    <div class="tname" id="typeName"></div>
+    <p id="typeDesc"></p>
+    <div class="row"><button class="btn" type="button" data-share="quiz">同期にもクイズを出す</button></div>
+    <p class="share-msg" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- 1 -->
+<section class="ch" id="exam">
+  <div class="ch-head"><div class="ch-no">CHAPTER 1</div><h2>国試は「落とさない試験」</h2></div>
+  <p class="body">国試は午前・午後で200問です。一般問題160問は1問1点、実地問題40問は1問3点です。合格には「総得点」と「実地問題」の両方で基準を超える必要があります。第61回（2026年2月）の基準と結果は下の表のとおりです。採点除外問題があるため、満点は年によって変わります。</p>
+  <div class="lab exam-table">
+    <div class="lab-title">第61回 合格基準と合格率</div>
+    <div class="et">
+      <div class="et-row et-h"><span></span><span>PT</span><span>OT</span></div>
+      <div class="et-row"><span>総得点</span><span><b>167</b> / 277点</span><span><b>167</b> / 278点</span></div>
+      <div class="et-row"><span>実地問題</span><span><b>41</b> / 117点</span><span><b>43</b> / 120点</span></div>
+      <div class="et-row"><span>合格率</span><span>89.7%</span><span>91.2%</span></div>
+      <div class="et-row"><span>新卒の合格率</span><span><b>94.9%</b></span><span><b>96.6%</b></span></div>
+    </div>
+  </div>
+  <div class="chat">
+    <div class="msg kid"><div class="ava"><img src="marty.png" alt=""></div><div class="bubble">9割以上受かるなら、楽勝じゃないですか？</div></div>
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">逆デス。みんなが取れる問題を<b>落とさない</b>人が受かる試験デス。難問を追うより、基本問題を本番まで忘れずに持っていくことがすべてデス。つまり国試対策は「<b>記憶を長持ちさせる技術</b>」の勝負デス！</div></div>
+  </div>
+  <p class="src"><span class="chip est">確立</span>厚生労働省「第61回理学療法士国家試験及び第61回作業療法士国家試験の合格発表について」（2026年3月23日）</p>
+</section>
+
+<!-- 2 -->
+<section class="ch" id="reread">
+  <div class="ch-head"><div class="ch-no">CHAPTER 2</div><h2>読み返し・マーカーは「やった気」になるだけ</h2></div>
+  <p class="body">2013年、心理学者のダンロスキーらが学生のよく使う10の勉強法を、数百の研究から評価しました。効果が高いと判定されたのは「練習テスト」と「分散学習」の2つだけです。一方、学生がいちばんよく使う「読み返し」「マーカー・線引き」「要約」は、効果が低いと判定されました。</p>
+  <div class="chat">
+    <div class="msg kid"><div class="ava"><img src="marty.png" alt=""></div><div class="bubble">え、ノートをきれいにまとめて何回も読むの、ダメなんですか…？</div></div>
+    <div class="msg doc shock"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">なんてこった！　ワタシも昔やってたデス。読み返すと文章に見覚えが出るので「<b>覚えた気</b>」になるデス。でも見覚えがあるのと、白紙から思い出せるのは別物デス。国試の選択肢は、まさにそこを突いてくるデス。</div></div>
+  </div>
+  <p class="src"><span class="chip est">確立</span>Dunlosky J, et al. Psychol Sci Public Interest. 2013;14(1):4-58. doi:10.1177/1529100612453266</p>
+</section>
+
+<!-- 3 -->
+<section class="ch" id="retrieval">
+  <div class="ch-head"><div class="ch-no">CHAPTER 3</div><h2>問題は「読む」ものではなく「解く」もの</h2></div>
+  <p class="body">ロディガーとカーピキーの有名な実験です。大学生が文章を覚えるときに、4回読み返すグループと、1回読んで3回「思い出すテスト」をするグループに分けました。覚えている量を5分後と1週間後に測ると、結果は時間で逆転しました。下のボタンで時間を進めてみてください。</p>
+  <div class="lab">
+    <div class="lab-title">LAB 3 ／ 時間を進める実験</div>
+    <h3>文章をどれだけ覚えていたか</h3>
+    <div class="row">
+      <div class="timebtns" role="group" aria-label="テストまでの時間">
+        <button type="button" id="t5" aria-pressed="true">5分後</button>
+        <button type="button" id="t7" aria-pressed="false">1週間後</button>
+      </div>
+    </div>
+    <div class="bars">
+      <div class="bar"><span>4回読み返し</span><div class="track"><div class="fill read" id="bRead"></div></div><span class="val" id="vRead">--</span></div>
+      <div class="bar"><span>1回読む＋3回テスト</span><div class="track"><div class="fill test" id="bTest"></div></div><span class="val" id="vTest">--</span></div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+    <p class="src">Roediger HL, Karpicke JD. Psychol Sci. 2006（実験2）。数値は図から読んだおよその値です。</p>
+  </div>
+  <div class="chat">
+    <div class="msg kid"><div class="ava"><img src="marty.png" alt=""></div><div class="bubble">5分後は読み返しのほうが上なのに、1週間でひっくり返った！</div></div>
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">これが<b>テスト効果</b>デス。思い出そうと頭を使う行為そのものが、記憶を強くするデス。しかも読み返しグループのほうが「覚えられた」と自信を持っていたデス。医療の世界でも、研修医で同じことが確かめられているデス。6か月以上たっても、テストで学んだ内容は39%、読んで学んだ内容は26%覚えていたデス。</div></div>
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">だから過去問は<b>選択肢を隠して</b>、まず自分で答えを言ってから見るデス。間違えたら解説を読み、<b>翌日もう一度解く</b>。解説を読んだだけで終わらせないことが大事デス！</div></div>
+  </div>
+  <p class="src"><span class="chip est">確立</span>Roediger HL, Karpicke JD. Psychol Sci. 2006;17(3):249-55. PMID 16507066 ／ Karpicke JD, Roediger HL. Science. 2008;319:966-8. PMID 18276894 ／ Larsen DP, et al. Med Educ. 2009;43(12):1174-81. PMID 19930508</p>
+</section>
+
+<!-- 4 -->
+<section class="ch" id="spacing">
+  <div class="ch-head"><div class="ch-no">CHAPTER 4</div><h2>復習は間をあけるほど残る</h2></div>
+  <p class="body">同じ時間をかけるなら、一気にやるより日をあけて何回かに分けたほうが長く覚えていられます。これが分散学習です。184本の論文をまとめた分析で確かめられています。さらに1,350人以上を対象にした研究では、最適な復習の間隔は「本番までの残り期間」で変わることが分かりました。本番が1週間後なら間隔は残り期間の20〜40%、1年後なら5〜10%くらいが最も成績が良くなりました。</p>
+  <div class="chat">
+    <div class="msg kid"><div class="ava"><img src="marty.png" alt=""></div><div class="bubble">じゃあ、残り約4か月のボクは、どれくらいあければいいんですか？</div></div>
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">研究の値から推測すると、<b>同じ範囲は1〜2週間おき</b>に解き直すのが目安デス。最初の復習だけは翌日や数日後に早めに入れて、だんだん間隔を広げるデス。下のボタンで、今日解いた問題の復習日を出してみるデス！</div></div>
+  </div>
+  <div class="lab">
+    <div class="lab-title">LAB 4 ／ 復習日ジェネレーター</div>
+    <h3>今日まちがえた問題、次はいつ解く？</h3>
+    <div class="row"><button class="btn" type="button" id="genBtn">復習日を出す</button></div>
+    <div class="tl" id="tl" aria-hidden="true"><div class="axis"></div></div>
+    <div class="tl-list" id="tlList" aria-live="polite"></div>
+  </div>
+  <p class="src"><span class="chip est">確立</span>Cepeda NJ, et al. Psychol Bull. 2006;132(3):354-80. PMID 16719566 ／ <span class="chip lik">有力</span>Cepeda NJ, et al. Psychol Sci. 2008;19(11):1095-102. PMID 19076480 ／ <span class="chip gue">推測</span>4か月に当てはめた間隔はこのサイトの推定です</p>
+</section>
+
+<!-- 5 -->
+<section class="ch" id="mix">
+  <div class="ch-head"><div class="ch-no">CHAPTER 5</div><h2>科目はまとめずに混ぜる</h2></div>
+  <p class="body">解剖学を3日、次に生理学を3日と、まとめてやりたくなります。でも本番は科目が混ざって出題されます。ある実験では、画家12人の絵柄を見分ける練習をしました。画家ごとにまとめて見るより、ほかの画家の絵と混ぜて見たほうが、初めて見る絵の画家をよく当てられました。それなのに、参加者の多くは「まとめたほうが覚えられた」と感じていました。</p>
+  <div class="lab">
+    <div class="lab-title">LAB 5 ／ シャッフル</div>
+    <h3>同じ量でも、並べ方で効き目が変わる</h3>
+    <div class="decks">
+      <div class="deck"><h4>まとめて（ブロック）</h4><div class="cards" id="blocked"></div></div>
+      <div class="deck"><h4>混ぜて（インターリーブ）</h4><div class="cards" id="mixed"></div></div>
+    </div>
+    <div class="row"><button class="btn ghost" type="button" id="shufBtn">混ぜなおす</button><span class="src">解＝解剖　生＝生理　運＝運動学</span></div>
+  </div>
+  <div class="chat">
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">混ぜると「これはどの知識で解く問題か」を毎回選ぶ練習になるデス。最初は手ごたえが悪く感じるデスが、それは<b>効いているサイン</b>デス。12月以降は、分野別ではなく<b>年度別の過去問</b>で解くデス。</div></div>
+  </div>
+  <p class="src"><span class="chip lik">有力</span>Kornell N, Bjork RA. Psychol Sci. 2008;19(6):585-92 ／ Dunlosky 2013では交互学習は「中程度」の評価</p>
+</section>
+
+<!-- 6 -->
+<section class="ch" id="sleep">
+  <div class="ch-head"><div class="ch-no">CHAPTER 6</div><h2>寝ている間に記憶は定着する</h2></div>
+  <p class="body">覚えた内容は、眠っている間に脳の中で再生され、定着しやすくなると考えられています。とくに深い睡眠（徐波睡眠）が、知識の記憶の定着に関わるとされています。睡眠を削って詰め込むと、せっかく覚えたものを固める時間を自分で捨てることになります。</p>
+  <div class="lab meter">
+    <div class="lab-title">LAB 6 ／ 今夜の睡眠</div>
+    <label for="sleepRange"><h3>今夜は何時間寝る予定？</h3></label>
+    <input type="range" id="sleepRange" min="3" max="9" step="0.5" value="6">
+    <p class="out" id="sleepOut"></p>
+  </div>
+  <p class="src"><span class="chip lik">有力</span>Diekelmann S, Born J. Nat Rev Neurosci. 2010;11(2):114-26. doi:10.1038/nrn2762 ／ <span class="chip gue">推測</span>何時間が最適かは個人差があり、国試受験生で直接確かめた研究ではありません</p>
+</section>
+
+<!-- 7 -->
+<section class="ch" id="plan">
+  <div class="ch-head"><div class="ch-no">CHAPTER 7</div><h2>残り4か月の実行プラン</h2></div>
+  <div class="chat">
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">ここまでの研究を、明日からの行動に落とすデス。できたらチェックするデス。チェックはこの端末に保存されるので、毎週ここに戻ってくるデス！</div></div>
+  </div>
+  <div class="lab" id="planLab">
+    <div class="lab-title">LAB 7 ／ チェックリスト</div>
+    <div class="row" style="justify-content:space-between"><span class="score" id="planScore">0 / 0</span></div>
+    <div class="pbar"><i id="planBar"></i></div>
+    <div id="planList" style="display:grid;gap:18px"></div>
+    <p class="src"><span class="chip gue">推測</span>月ごとの配分は2〜6章の研究を国試に当てはめたこのサイトの提案です</p>
+  </div>
+</section>
+
+<!-- re-quiz -->
+<section class="ch" id="requiz">
+  <div class="ch-head"><div class="ch-no">BONUS</div><h2>もう一度、最初のクイズ</h2></div>
+  <div class="chat">
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">読み終わったら、<b>もう一度解く</b>デス。これがまさにテスト効果デス。最初の点数と比べてみるデス！</div></div>
+  </div>
+  <div class="lab" id="quiz2"><div class="lab-title">LAB 8 ／ 想起練習</div></div>
+</section>
+
+<section class="ch" id="save">
+  <div class="ch-head"><div class="ch-no">SAVE</div><h2>スクショ用まとめ</h2></div>
+  <div class="savecard">
+    <h3>国試に効く<br>5つのルール</h3>
+    <ol>
+      <li>読み返すより、解いて思い出す</li>
+      <li>選択肢を隠して、先に自分で答える</li>
+      <li>まちがえた問題は翌日・1週間後・2週間後に解き直す</li>
+      <li>科目は混ぜる。12月からは年度別</li>
+      <li>削るのは睡眠ではなく、ノートのまとめ直し</li>
+    </ol>
+    <small>@doc_bolt_pt ／ ドク・ボルトの国試勉強ラボ</small>
+  </div>
+  <div class="chat">
+    <div class="msg doc"><div class="ava"><img src="doc.png" alt=""></div><div class="bubble">この画面をスクショして、待ち受けにするデス！　見るたびに思い出す＝テスト効果デス！</div></div>
+  </div>
+</section>
+
+<aside class="follow">
+  <img src="doc.png" alt="">
+  <h2>「それ、根拠ある？」を<br>毎週図解で届けるデス</h2>
+  <p>臨床と国試に役立つ研究を、PubMedで確認したものだけで解説しています。</p>
+  <a class="cta" href="https://www.instagram.com/doc_bolt_pt/" target="_blank" rel="noopener">Instagramでフォローする</a>
+  <span class="handle">@doc_bolt_pt</span>
+  <button class="btn ghost" type="button" data-share="site">このサイトを友達に送る</button>
+  <p class="share-msg" aria-live="polite" style="color:#fff"></p>
+</aside>
+
+<div class="refs">
+  <h3>参考文献</h3>
+  <ol>
+    <li>厚生労働省. 第61回理学療法士国家試験及び第61回作業療法士国家試験の合格発表について. 2026.</li>
+    <li>Dunlosky J, Rawson KA, Marsh EJ, Nathan MJ, Willingham DT. Improving students' learning with effective learning techniques. Psychol Sci Public Interest. 2013;14(1):4-58.</li>
+    <li>Roediger HL, Karpicke JD. Test-enhanced learning: taking memory tests improves long-term retention. Psychol Sci. 2006;17(3):249-55. PMID 16507066</li>
+    <li>Karpicke JD, Roediger HL. The critical importance of retrieval for learning. Science. 2008;319(5865):966-8. PMID 18276894</li>
+    <li>Larsen DP, Butler AC, Roediger HL. Repeated testing improves long-term retention relative to repeated study: a randomised controlled trial. Med Educ. 2009;43(12):1174-81. PMID 19930508</li>
+    <li>Cepeda NJ, Pashler H, Vul E, Wixted JT, Rohrer D. Distributed practice in verbal recall tasks. Psychol Bull. 2006;132(3):354-80. PMID 16719566</li>
+    <li>Cepeda NJ, Vul E, Rohrer D, Wixted JT, Pashler H. Spacing effects in learning: a temporal ridgeline of optimal retention. Psychol Sci. 2008;19(11):1095-102. PMID 19076480</li>
+    <li>Kornell N, Bjork RA. Learning concepts and categories: is spacing the "enemy of induction"? Psychol Sci. 2008;19(6):585-92.</li>
+    <li>Diekelmann S, Born J. The memory function of sleep. Nat Rev Neurosci. 2010;11(2):114-26.</li>
+  </ol>
+</div>
+<footer>© doc_bolt_pt ／ 本サイトは学習方法の一般的な情報です。試験の公式情報は厚生労働省の発表を確認してください。</footer>
+</main>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = {
+    get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+    set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+
+  /* intro loader: once per visit, skipped for reduced motion */
+  (function(){
+    let seen = false;
+    try { seen = sessionStorage.getItem('introSeen') === '1'; sessionStorage.setItem('introSeen','1'); } catch(e) {}
+    if (reduce || seen) return;
+    const intro = document.getElementById('intro');
+    intro.hidden = false;
+    const close = () => { intro.classList.add('out'); setTimeout(() => { intro.hidden = true; }, 550); };
+    intro.addEventListener('click', close);
+    setTimeout(close, 2600);
+  })();
+
+  /* countdown: rough target, late February */
+  (function(){
+    const now = new Date();
+    let y = now.getFullYear(); if (now.getMonth() >= 2) y += 1;
+    const target = new Date(y, 1, 22);
+    const d = Math.max(0, Math.ceil((target - now) / 86400000));
+    const el = document.getElementById('days');
+    if (reduce) { el.textContent = d; return; }
+    let n = 0; const step = Math.max(1, Math.round(d / 40));
+    const t = setInterval(() => { n = Math.min(d, n + step); el.textContent = n; if (n >= d) clearInterval(t); }, 25);
+  })();
+
+  /* reading progress */
+  const prog = document.getElementById('prog');
+  addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+  }, {passive:true});
+
+  /* bubbles pop as they enter (they stay visible at rest) */
+  if ('IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('pop'); io.unobserve(e.target); }
+    }), {threshold: .6});
+    document.querySelectorAll('.msg').forEach(m => io.observe(m));
+  }
+
+  /* tap the doc */
+  const lines = ['テスト効果デス！','読み返すより、思い出すデス！','間隔をあけるデス！','混ぜるデス！','今夜はちゃんと寝るデス！'];
+  document.getElementById('docHero').addEventListener('click', e => {
+    const img = e.currentTarget; img.title = lines[Math.floor(Math.random()*lines.length)];
+    img.animate && !reduce && img.animate([{transform:'rotate(0)'},{transform:'rotate(-14deg) scale(1.05)'},{transform:'rotate(8deg)'},{transform:'none'}],{duration:500});
+  });
+
+  /* quiz */
+  const QUIZ = [
+    {q:'教科書やノートを何度も読み返すのは、効率のいい勉強法だ', a:false, why:'読み返しは効果が低い勉強法と判定されています（2章）。'},
+    {q:'大事なところにマーカーを引くと、記憶に残りやすい', a:false, why:'線引きも効果が低いと判定されています（2章）。'},
+    {q:'問題を解いて思い出すこと自体が、記憶を強くする', a:true, why:'テスト効果。1週間後の記憶で読み返しを上回りました（3章）。'},
+    {q:'同じ科目をまとめて一気にやるほうが身につく', a:false, why:'日をあける・混ぜるほうが長く残ります（4・5章）。'},
+    {q:'試験前は睡眠を削ってでも詰め込むべきだ', a:false, why:'睡眠中に記憶が定着すると考えられています（6章）。'}
+  ];
+  function buildQuiz(rootId, key, onDone){
+    const root = document.getElementById(rootId);
+    let answered = 0, correct = 0;
+    const score = document.createElement('p'); score.className = 'score';
+    const upd = () => { score.innerHTML = '正解 <span class="big">' + correct + '</span> / ' + QUIZ.length + (answered < QUIZ.length ? '' : resultLine()); };
+    const resultLine = () => {
+      if (key === 'q2') {
+        const first = store.get('q1');
+        if (first != null) return '<br><small>最初は ' + first + ' 問 → 今回 ' + correct + ' 問。思い出すたびに記憶は強くなるデス！</small>';
+      }
+      return correct === QUIZ.length ? '<br><small>全問正解！ でも本当に大事なのは1週間後に覚えているかデス。</small>' : '<br><small>大丈夫デス。ここから下で全部ひっくり返すデス！</small>';
+    };
+    QUIZ.forEach((item, i) => {
+      const box = document.createElement('div'); box.className = 'q';
+      box.innerHTML = '<p>Q' + (i+1) + '. ' + item.q + '</p><div class="opts"><button type="button" aria-label="○">○</button><button type="button" aria-label="×">×</button></div><p class="why" hidden></p>';
+      const [bo, bx] = box.querySelectorAll('button');
+      const why = box.querySelector('.why');
+      const pick = ans => {
+        bo.disabled = bx.disabled = true;
+        const ok = ans === item.a;
+        (item.a ? bo : bx).classList.add('right');
+        if (!ok) (ans ? bo : bx).classList.add('wrong');
+        why.textContent = (ok ? '正解！ ' : 'なんてこった！ ') + why.dataset.t; why.hidden = false;
+        answered++; if (ok) correct++;
+        upd();
+        if (answered === QUIZ.length) { store.set(key, correct); onDone && onDone(correct); }
+      };
+      why.dataset.t = item.why;
+      bo.addEventListener('click', () => pick(true));
+      bx.addEventListener('click', () => pick(false));
+      root.appendChild(box);
+    });
+    upd(); root.appendChild(score);
+  }
+  const TYPES = [
+    {min:5, name:'エビデンス派', desc:'勉強法の常識がすでに研究と一致しているデス！ あとは4か月続けるだけ。7章のチェックリストで仕上げるデス。'},
+    {min:3, name:'あと一歩派', desc:'半分以上は研究どおり。残りの思い込みを直すと、同じ勉強時間でも残る量が変わるデス。'},
+    {min:0, name:'がんばり屋の読み返し派', desc:'努力の量は十分デス。やり方を「読む」から「思い出す」に変えるだけで伸びしろが大きいデス！'}
+  ];
+  let quizScore = null;
+  buildQuiz('quiz1', 'q1', c => {
+    quizScore = c;
+    const t = TYPES.find(t => c >= t.min);
+    document.getElementById('typeName').textContent = c + '問正解 ― ' + t.name;
+    document.getElementById('typeDesc').textContent = t.desc;
+    document.getElementById('typeBox').hidden = false;
+  });
+
+  /* share: Web Share where allowed, otherwise copy the link */
+  const SITE_URL = 'https://hijiriinu.github.io/doc-bolt-ig-stage/kokushi/';
+  document.querySelectorAll('[data-share]').forEach(b => b.addEventListener('click', async () => {
+    const msg = b.closest('.type, .follow').querySelector('.share-msg');
+    const text = b.dataset.share === 'quiz' && quizScore != null
+      ? '国試の勉強法クイズ、5問中' + quizScore + '問正解だった。あなたは何問？'
+      : 'PT・OT国試の勉強法を研究で確かめたサイト。読み返しより効く方法があるらしい';
+    try { if (navigator.share) { await navigator.share({title:'ドク・ボルトの国試勉強ラボ', text, url:SITE_URL}); return; } } catch(e) { if (e && e.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(text + ' ' + SITE_URL); if (msg) msg.textContent = 'リンクをコピーしました。LINEなどに貼り付けてください。'; }
+    catch(e) { if (msg) msg.textContent = SITE_URL; }
+  }));
+  buildQuiz('quiz2', 'q2', c => { if (c === QUIZ.length) confetti(); });
+
+  /* retrieval chart */
+  const DATA = { m5: {read:83, test:71}, w1: {read:40, test:61} };
+  const flash = document.getElementById('flash');
+  function showTime(k, withFlash){
+    const d = DATA[k];
+    document.getElementById('bRead').style.width = d.read + '%';
+    document.getElementById('bTest').style.width = d.test + '%';
+    document.getElementById('vRead').textContent = '約' + d.read + '%';
+    document.getElementById('vTest').textContent = '約' + d.test + '%';
+    document.getElementById('t5').setAttribute('aria-pressed', k === 'm5');
+    document.getElementById('t7').setAttribute('aria-pressed', k === 'w1');
+    document.getElementById('verdict').textContent = k === 'm5'
+      ? '5分後は読み返しが上。「やっぱり読み返しだ」と思ったら、1週間後を押してください。'
+      : 'なんてこった！ 1週間後はテストした側が約20ポイント上回りました。';
+    if (withFlash && !reduce) { flash.classList.remove('on'); void flash.offsetWidth; flash.classList.add('on'); }
+  }
+  document.getElementById('t5').addEventListener('click', () => showTime('m5', false));
+  document.getElementById('t7').addEventListener('click', () => showTime('w1', true));
+  requestAnimationFrame(() => showTime('m5', false));
+
+  /* spaced review generator */
+  function genSchedule(){
+    const tl = document.getElementById('tl'), list = document.getElementById('tlList');
+    tl.querySelectorAll('.dot,.lbl').forEach(n => n.remove()); list.textContent = '';
+    const now = new Date(); now.setHours(0,0,0,0);
+    let y = now.getFullYear(); if (now.getMonth() >= 2) y += 1;
+    const exam = new Date(y, 1, 22);
+    const total = Math.max(1, Math.round((exam - now) / 86400000));
+    const offs = [0, 1, 3, 7, 14];
+    while (offs[offs.length-1] + 14 < total - 3) offs.push(offs[offs.length-1] + 14);
+    offs.push(total);
+    const fmt = d => (d.getMonth()+1) + '/' + d.getDate();
+    offs.forEach((o, i) => {
+      const dot = document.createElement('i'); dot.className = 'dot' + (i === 0 ? ' start' : i === offs.length-1 ? ' end' : '');
+      dot.style.left = (o / total * 100) + '%'; tl.appendChild(dot);
+      setTimeout(() => dot.classList.add('on'), reduce ? 0 : i * 110);
+      const dt = new Date(now.getTime() + o*86400000);
+      if (i === 0 || i === offs.length-1) {
+        const l = document.createElement('span'); l.className = 'lbl'; l.style.left = Math.min(92, Math.max(6, o/total*100)) + '%';
+        l.textContent = i === 0 ? '今日' : '本番の目安'; tl.appendChild(l);
+      }
+      const s = document.createElement('span');
+      s.textContent = (i === 0 ? '今日 ' : i === offs.length-1 ? '本番 ' : (i) + '回目 ') + fmt(dt);
+      list.appendChild(s);
+    });
+  }
+  document.getElementById('genBtn').addEventListener('click', genSchedule);
+  genSchedule();
+
+  /* shuffle */
+  const S = ['a','b','c'], NAME = {a:'解', b:'生', c:'運'};
+  function renderDecks(){
+    const blocked = document.getElementById('blocked'), mixed = document.getElementById('mixed');
+    blocked.innerHTML = ''; mixed.innerHTML = '';
+    const arr = [];
+    S.forEach(s => { for (let i=0;i<4;i++){ arr.push(s); const c = document.createElement('span'); c.className='card '+s; c.textContent=NAME[s]; blocked.appendChild(c);} });
+    for (let i = arr.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i],arr[j]] = [arr[j],arr[i]]; }
+    arr.forEach((s,i) => { const c = document.createElement('span'); c.className='card '+s+(reduce?'':' spin'); c.style.animationDelay = (i*40)+'ms'; c.textContent=NAME[s]; mixed.appendChild(c); });
+  }
+  document.getElementById('shufBtn').addEventListener('click', renderDecks);
+  renderDecks();
+
+  /* sleep */
+  const sr = document.getElementById('sleepRange'), so = document.getElementById('sleepOut');
+  function sleepMsg(){
+    const v = +sr.value; let m;
+    if (v < 5) m = 'なんてこった！ 覚えたものを固める時間が足りないデス。今日の分は明日の朝に回すデス。';
+    else if (v < 6.5) m = 'もう少し寝たいデス。夜ふかしするより、朝に15分の解き直しを入れるほうが得デス。';
+    else if (v <= 8.5) m = 'いい感じデス！ 寝る前に今日まちがえた問題を5問だけ解き直すと、そのまま定着に回るデス。';
+    else m = 'しっかり寝るデス！ 起きる時間は毎日そろえて、試験当日の朝に合わせていくデス。';
+    so.textContent = v + '時間 ― ' + m;
+  }
+  sr.addEventListener('input', sleepMsg); sleepMsg();
+
+  /* plan checklist */
+  const PLAN = [
+    {m:'10〜11月', s:'土台づくり', items:[
+      '過去問を分野別に1周。選択肢を隠して、自分で答えを言ってから見る',
+      'まちがえた問題に印をつけ、翌日と3日後に解き直す',
+      'ノートのまとめ直しや読み返しの時間を、解き直しの時間に置きかえる'
+    ]},
+    {m:'12月', s:'混ぜて、あける', items:[
+      '過去問を分野別から年度別に切りかえる',
+      '印のついた問題だけを2週間おきに解き直す',
+      '白紙に「今日覚えたこと」を3分で書き出してから寝る'
+    ]},
+    {m:'1月', s:'本番の型', items:[
+      '週1回、午前・午後を時間を計って通しで解く',
+      '実地問題（1問3点）を落とした分野を優先して解き直す',
+      '寝る時間と起きる時間を本番当日に合わせ始める'
+    ]},
+    {m:'2月', s:'仕上げ', items:[
+      '新しい教材には手を出さず、印のついた問題だけを回す',
+      '前日は軽い解き直しだけにして、いつも通りの時間に寝る'
+    ]}
+  ];
+  const saved = store.get('plan') || {};
+  const list = document.getElementById('planList');
+  let total = 0;
+  PLAN.forEach((p, pi) => {
+    const box = document.createElement('div'); box.className = 'month';
+    box.innerHTML = '<h4>' + p.m + '<span>' + p.s + '</span></h4>';
+    p.items.forEach((t, ti) => {
+      const id = 'plan-' + pi + '-' + ti; total++;
+      const lab = document.createElement('label'); lab.className = 'check'; lab.htmlFor = id;
+      lab.innerHTML = '<input type="checkbox" id="' + id + '"><span></span>';
+      lab.querySelector('span').textContent = t;
+      const cb = lab.querySelector('input'); cb.checked = !!saved[id]; lab.classList.toggle('done', cb.checked);
+      cb.addEventListener('change', () => { saved[id] = cb.checked; store.set('plan', saved); lab.classList.toggle('done', cb.checked); updPlan(true); });
+      box.appendChild(lab);
+    });
+    list.appendChild(box);
+  });
+  function updPlan(fromUser){
+    const n = Object.values(saved).filter(Boolean).length;
+    document.getElementById('planScore').textContent = n + ' / ' + total + (n === total ? '　準備完了デス！' : '');
+    document.getElementById('planBar').style.width = (n / total * 100) + '%';
+    if (fromUser && n === total) confetti();
+  }
+  updPlan(false);
+
+  /* confetti */
+  function confetti(){
+    if (reduce) return;
+    const c = document.getElementById('confetti'), x = c.getContext('2d');
+    c.width = innerWidth; c.height = innerHeight;
+    const cols = ['#c4392d','#f2b705','#2e8b57','#3a6ea5','#272b33'];
+    const ps = Array.from({length:140}, () => ({x:Math.random()*c.width, y:-20-Math.random()*c.height*.5, r:4+Math.random()*5, vx:-1.5+Math.random()*3, vy:2+Math.random()*3, a:Math.random()*6, col:cols[Math.floor(Math.random()*cols.length)]}));
+    let f = 0;
+    (function draw(){
+      x.clearRect(0,0,c.width,c.height);
+      ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.a += .1; x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.fillStyle = p.col; x.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6); x.restore(); });
+      if (++f < 200) requestAnimationFrame(draw); else x.clearRect(0,0,c.width,c.height);
+    })();
+  }
+})();
+</script>
+
+</body>
+</html>
